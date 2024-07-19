@@ -1,6 +1,7 @@
 from english import ENGLISH_WORDS
 
-input_string = "proles"
+#accepts only lowercase letters and spaces
+input_string = "bananas"
 
 def run(input):
     input_dict = deconstruct_string(input)
@@ -11,10 +12,11 @@ def run(input):
 def deconstruct_string(input_string):
     output_dict = {}
     for character in input_string:
-        if character in output_dict:
-            output_dict[character] += 1
-        else:
-            output_dict.update({character:1})
+        if character not in " ":
+            if character in output_dict:
+                output_dict[character] += 1
+            else:
+                output_dict.update({character:1})
     return output_dict
 
 
@@ -40,7 +42,7 @@ def identify_all_substrings(input_dict, found_word_list = []):
                     is_valid_substring = False
                     break
                 else:
-                    working_input_dict[test_letter] -= 1
+                    working_input_dict[test_letter] -= test_dict[test_letter]
             except:
                 is_valid_substring = False
                 break
