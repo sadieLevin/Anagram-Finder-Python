@@ -17,16 +17,19 @@ def deconstruct_string(input_string):
                 output_dict.update({character:1})
     return output_dict
 
-
 def identify_all_substrings(input_dict, found_word_list = []):
-
     #checks if base case found, returns None if input dict has no remaining letters
     finished = True
     for element in input_dict:
         if input_dict[element] > 0:
             finished = False
     if finished:
-        print(found_word_list)
+        output_string = ""
+        for word in found_word_list:
+            for letter in word:
+                output_string += letter
+            output_string += " "
+        print(output_string.strip())
         return
     
     #checks every english word to see if it could be constructed using input dict's characters
@@ -51,7 +54,5 @@ def identify_all_substrings(input_dict, found_word_list = []):
             temp_found_word_list.append(test_word)
             identify_all_substrings(working_input_dict, temp_found_word_list)
 
-
-
 if __name__ == "__main__":
-    run(input("Enter the word or phrase you would like all anagrams of!\n").lower())
+    run(input("Enter the word or phrase you would like all anagrams of!\n>>> ").lower())
