@@ -1,8 +1,6 @@
 from english import ENGLISH_WORDS
 
 #accepts only lowercase letters and spaces
-input_string = "bananas"
-
 def run(input):
     input_dict = deconstruct_string(input)
     identify_all_substrings(input_dict)
@@ -56,4 +54,4 @@ def identify_all_substrings(input_dict, found_word_list = []):
 
 
 if __name__ == "__main__":
-    run(input_string)
+    run(input("Enter the word or phrase you would like all anagrams of!\n").lower())
