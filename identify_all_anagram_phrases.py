@@ -1,13 +1,13 @@
 from english import ENGLISH_WORDS
 
-#accepts only lowercase letters and spaces
+# Accepts only lowercase letters and spaces
 def run(input):
     input_dict = deconstruct_string(input)
     all_possible_substrings = identify_possible_substrings(input_dict)
     identify_all_anagrams(input_dict, found_word_list = [], possible_word_list = all_possible_substrings)
     print("All done!")
 
-#takes all characters in string, turns them into 
+# Takes all characters in string, turns them into 
 def deconstruct_string(input_string):
     output_dict = {}
     for character in input_string:
@@ -18,6 +18,8 @@ def deconstruct_string(input_string):
                 output_dict.update({character:1})
     return output_dict
 
+# Makes a subset of the english words dictionary to only include individual words that are anagrams of the input string.
+# This cuts down on search time substantially
 def identify_possible_substrings(input_dict):
     all_possible_substrings = []
     for test_word in ENGLISH_WORDS:
@@ -38,7 +40,7 @@ def identify_possible_substrings(input_dict):
     return all_possible_substrings
 
 def identify_all_anagrams(input_dict, found_word_list = [], possible_word_list = ENGLISH_WORDS):
-    #checks if base case found, returns None if input dict has no remaining letters
+    # Checks if base case found, returns None if input dict has no remaining letters
     finished = True
     for element in input_dict:
         if input_dict[element] > 0:
@@ -52,7 +54,7 @@ def identify_all_anagrams(input_dict, found_word_list = [], possible_word_list =
         print(output_string.strip())
         return
     
-    #checks every english word to see if it could be constructed using input dict's characters
+    # Checks every english word to see if it could be constructed using input dict's characters
     for test_word in possible_word_list:
         working_input_dict = input_dict.copy()
         test_dict = deconstruct_string(test_word)
@@ -68,7 +70,7 @@ def identify_all_anagrams(input_dict, found_word_list = [], possible_word_list =
                 is_valid_substring = False
                 break
 
-        #passes any found words back into the function recursively, looking for new ones
+        # Passes any found words back into the function recursively, looking for new ones
         if is_valid_substring:
             temp_found_word_list = found_word_list.copy()
             temp_found_word_list.append(test_word)
